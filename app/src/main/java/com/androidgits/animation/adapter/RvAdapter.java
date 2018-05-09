@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.androidgits.animation.model.Anime;
 import com.androidgits.animation.R;
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -21,6 +22,7 @@ import java.util.List;
  */
 
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder>{
+
 
     private Context mcontext;
     private List<Anime> mData;
@@ -44,7 +46,15 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder>{
         holder.tvstudio.setText(mData.get(position).getStudio());
         holder.tvcat.setText(mData.get(position).getCategorie());
 
-        //Glide.with(mcontext).load(mData.get(position).getImage_url()).into(holder.AnimeThumbnail);
+//        Glide.with(mcontext).load(mData.get(position).getImage_url())
+//                .centerCrop()
+//                .placeholder(R.drawable.loading_image)
+//                .error(R.drawable.error_image)
+//                .into(holder.AnimeThumbnail);
+        Picasso.with(mcontext).load(mData.get(position).getImage_url())
+                .placeholder(R.drawable.loading_image)
+                .error(R.drawable.error_image)
+                .into(holder.AnimeThumbnail);
     }
 
     @Override
@@ -61,6 +71,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder>{
             tv_rate = (TextView) itemView.findViewById(R.id.rating);
             tvstudio = (TextView) itemView.findViewById(R.id.studio);
             tvcat = (TextView) itemView.findViewById(R.id.categorie);
+            AnimeThumbnail = (ImageView) itemView.findViewById(R.id.imageView);
         }
     }
 }
